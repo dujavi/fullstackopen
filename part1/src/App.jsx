@@ -1,58 +1,55 @@
-const Header = (props) => {
-	console.log(props)
-	return (
-		<h1>{props.title}</h1>
-	)
-}
-const Part = (props) => {
-	console.log(props)
-	return (
-		<p>
-			{props.part.name} {props.part.exercises}
-		</p>
-	)
-}
-const Content = (props) => {
-	console.log(props)
+import { useState } from 'react'
+import Unicafe from './Unicafe'
+import CourseInfo from './CourseInfo'
+import Anecdotes from './Anecdotes'
+import './App.css'
+
+const Navigation = (props) => {
 	return (
 		<>
-			<Part part={props.parts[0]} />
-			<Part part={props.parts[1]} />
-			<Part part={props.parts[2]} />
+		<h1>Part 1 Exercises - Please select an exercise</h1>
+		<button
+			className={
+				'nav-button' +
+				(props.activeApp === 'CourseInfo' ? ' nav-button--active' : '')
+			}
+			onClick={() => props.setActiveApp('CourseInfo')}
+		>
+			CourseInfo (1.1 - 1.5)
+		</button>
+		<button
+			className={
+				'nav-button' +
+				(props.activeApp === 'Unicafe' ? ' nav-button--active' : '')
+			}
+			onClick={() => props.setActiveApp('Unicafe')}
+		>
+			Unicafe (1.6 - 1.10)
+		</button>
+		<button
+			className={
+				'nav-button' +
+				(props.activeApp === 'Anecdotes' ? ' nav-button--active' : '')
+			}
+			onClick={() => props.setActiveApp('Anecdotes')}
+		>
+			Anecdotes (1.12 - 1.14)
+		</button>
+		<hr/>
 		</>
 	)
 }
-const Total = (props) => {
-	console.log(props)
-	return (
-		<p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
-	)
-}
+
+
 const App = () => {
-	const course = {
-	  name: 'Half Stack application development',
-	  parts: [
-		 {
-			name: 'Fundamentals of React',
-			exercises: 10
-		 },
-		 {
-			name: 'Using props to pass data',
-			exercises: 7
-		 },
-		 {
-			name: 'State of a component',
-			exercises: 14
-		 }
-	  ]
-	}
- 
+	const [activeApp, setActiveApp] = useState('CourseInfo')
 	return (
-	  <div>
-		 <Header title={course.name} />
-		 <Content parts={course.parts} />
-		 <Total parts={course.parts} />
-	  </div>
+		<div>
+			<Navigation activeApp={activeApp} setActiveApp={setActiveApp} />
+			{activeApp === 'Unicafe' && <Unicafe />}
+			{activeApp === 'CourseInfo' && <CourseInfo />}
+			{activeApp === 'Anecdotes' && <Anecdotes />}
+		</div>
 	)
  }
  

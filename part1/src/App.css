@@ -1,0 +1,15 @@
+ .nav-button {
+   margin-right: 8px;
+   background-color: #e0e0e0;
+   color: black;
+   border: none;
+   padding: 8px 12px;
+   border-radius: 4px;
+   cursor: pointer;
+ }
+
+ .nav-button--active {
+   background-color: #1976d2;
+   color: white;
+ }
+
